@@ -40,7 +40,7 @@ class ParceirosController extends AdminController
         $grid->column('telemovel', __('Telemovel'));
         $grid->column('horario_atendimento', __('Horario atendimento'));
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('updated_at', __('Updated at')); 
 
         return $grid;
     }
