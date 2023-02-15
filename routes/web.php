@@ -19,3 +19,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/parceiros', [HomeController::class, 'parceiros']);
+Route::get('/associar', [HomeController::class, 'associar']);
+Route::post('/associar', [HomeController::class, 'save']);

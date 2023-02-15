@@ -22,9 +22,9 @@ class Cliente extends Model
     }
 
 
-    public function dependentes()
+    public function dependentes($cliente_id)
     {
-        $dependentes = Dependentes::select('dependentes.nome', 'dependentes.nascimento', 'parentescos.nome as parentesco')->join('parentescos', 'parentescos.id', '=', 'dependentes.parentesco_id')->get();
+        $dependentes = Dependentes::select('dependentes.nome', 'dependentes.nascimento', 'parentescos.nome as parentesco')->join('parentescos', 'parentescos.id', '=', 'dependentes.parentesco_id')->where('cliente_id',$cliente_id)->get();
         
         return $dependentes;
     }

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Mono:300,300italic,400,700%7CArvo:400,700">
@@ -56,26 +57,23 @@
         <div class="shell">
           <div class="range range-50">
             <div class="cell-sm-6 cell-md-4">
-              <h3>Pages</h3>
+              <h3>{{getConfig('texto_paginas')->valor}}</h3>
               <div class="divider divider-conch"></div>
               <ul class="footer-navigation row footer-navigation-vertical" style="max-width: 390px;">
-                <li class="col-xs-6"><a href="index.html">Home</a></li>
-                <li class="col-xs-6"><a href="blog.html">Blog</a></li>
-                <li class="col-xs-6"><a href="about.html">About</a></li>
-                <li class="col-xs-6"><a href="shop.html">Shop</a></li>
-                <li class="col-xs-6"><a href="services.html">Services</a></li>
-                <li class="col-xs-6"><a href="contacts-1.html">Contacts</a></li>
+              @foreach($menu as $k=>$me)
+                <li class="col-xs-6"><a href="{{$me['valor']}}">{{$me['nome']}}</a></li>
+               @endforeach
               </ul>
             </div>
             <div class="cell-sm-6 cell-md-5">
-              <h3>Description</h3>
+              <h3>{{getConfig('nome_site')->valor}}</h3>
               <div class="divider divider-conch"></div>
               <div class="text-highlighted-wrap">
-                <p class="text-highlighted">Barbershop is a No.1 place to have a men’s haircut in San Francisco. Here you can get luxury barber experience at a reasonable price.</p>
+                <p class="text-highlighted">{{getConfig('texto_footer')->valor}}</p>
               </div>
             </div>
             <div class="cell-sm-6 cell-md-3">
-              <h3>Follow Us</h3>
+              <h3>{{getConfig('texto_siganos')->valor}}</h3>
               <div class="divider divider-conch"></div>
               <ul class="inline-list inline-list-xs">
                 <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="#"></a></li>

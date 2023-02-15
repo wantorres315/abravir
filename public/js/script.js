@@ -51,6 +51,67 @@ var userAgent = navigator.userAgent.toLowerCase(),
  */
 $document.ready(function () {
 
+	$("body").on('click', '.add_dependente', function(){
+		const html = '<div class = "row"><div class="cell-sm-4 col-lg-4"><div class="form-group"><label class="form-label-outside" for="contact-last-name">Nome</label><input class="form-control" id="contact-last-name" type="text" name="nome_dependente[]" ></div></div><div class="cell-sm-4 col-lg-4"><div class="form-group"><label class="form-label-outside" for="contact-last-name">Data de Nascimento</label><input class="form-control" id="contact-last-name" type="date" name="nascimento_dependente[]" ></div></div><div class="cell-sm-4 col-lg-4"><div class="form-group"><label class="form-label-outside" for="contact-last-name">Parentesco</label><select class="form-control" id="contact-last-name" type="text" name="parentesco_dependente[]" ><option value = "1">Pai/Mãe</option><option value = "2">Filho/Filha</option><option value = "3">Irmão/Irmã</option><option value = "4">Primo/Prima</option><option value = "5">Cunhado/Cunhada</option><option value = "6">Avô/Avó</option><option value = "7">Sogro/Sogra</option></select></div></div></div>';
+		
+		$("#dependentes").append(html);
+	});
+
+	$("body").on('click', '.form_enviar', function(){
+			let enviar = "true";
+			if($("#nome_completo").val() == ''){
+					$("#nome_completo").css('border','1px solid red');
+					enviar = "false";
+			}
+		 	if($("#email").val() == ''){
+					$("#email").css('border','1px solid red');
+					enviar = "false";
+			}
+			if($("#telefone").val() == ''){
+				$("#telefone").css('border','1px solid red');
+				enviar = "false";
+			}
+			if($("#telemovel").val() == ''){
+				$("#telemovel").css('border','1px solid red');
+				enviar = "false";
+			}
+			if($("#nacionalidade").val() == ''){
+				$("#nacionalidade").css('border','1px solid red');
+				enviar = "false";
+			}
+			if($("#nascimento").val() == ''){
+				$("#nascimento").css('border','1px solid red');
+				enviar = "false";
+			}
+			if($("#numero_documento").val() == ''){
+				$("#numero_documento").css('border','1px solid red');
+				enviar = "false";
+			}
+			if($("#codigo_postal").val() == ''){
+				$("#codigo_postal").css('border','1px solid red');
+				enviar = "false";
+			}
+			if($("#endereco").val() == ''){
+				$("#endereco").css('border','1px solid red');
+				enviar = "false";
+			}
+			let checkbox = $('#acordo');
+			if(!checkbox.is(":checked")) {
+				$("#label_acordo").css('color','red');
+				enviar = "false";
+			}
+		 	if(enviar == "true"){
+				$(".rd-mailform").submit();
+		 	}
+	});
+	$("body").on('focus','#nome_completo, #email, #telefone, #telemovel, #nacionalidade, #nascimento, #numero_documento, #codigo_postal, #endereco', function(){
+		$(this).css('border','1px solid #cecece');
+	});
+
+	$("body").on('change','#acordo', function(){
+		$("#label_acordo").css('color','#014d55');
+	});
+	
 	/**
 	 * isScrolledIntoView
 	 * @description  check the element whas been scrolled into the view
@@ -765,7 +826,7 @@ $document.ready(function () {
 					}
 				},
 				success: function (result) {
-
+					
 					var form = $(plugins.rdMailForm[this.extraData.counter]),
 						output = $("#" + form.attr("data-form-output")),
 						select = form.find('select');
@@ -778,7 +839,7 @@ $document.ready(function () {
 						grecaptcha.reset();
 					}
 
-					result = result.length === 5 ? result : 'MF255';
+					result = result.length === 5 ? result : 'MF000';
 					output.text(msg[result]);
 
 					if (result === "MF000") {
@@ -1189,6 +1250,6 @@ $document.ready(function () {
 			});
 		}
 	}
-
+	
 });
 

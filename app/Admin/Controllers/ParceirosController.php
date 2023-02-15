@@ -32,15 +32,11 @@ class ParceirosController extends AdminController
       
         $grid->column('tipo_atividade', __('Tipo atividade'));
         $grid->column('site', __('Site'));
-        $grid->column('facebook', __('Facebook'));
-        $grid->column('instagram', __('Instagram'));
-        $grid->column('tiktok', __('Tiktok'));
-        $grid->column('telefone', __('Telefone'));
-        $grid->column('endereco', __('Endereco'));
+        $grid->column('email', __('Email'));
         $grid->column('telemovel', __('Telemovel'));
         $grid->column('horario_atendimento', __('Horario atendimento'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at')); 
+        $grid->column('observacoes', __('Observações sobre a parceria'));
+     
  
         return $grid;
     }
@@ -89,6 +85,7 @@ class ParceirosController extends AdminController
         $form->text('facebook', __('Facebook'));
         $form->text('instagram', __('Instagram'));
         $form->text('tiktok', __('Tiktok'));
+        $form->email('email', __('Email'));
         $form->text('telefone', __('Telefone'));
         $form->text('endereco', __('Endereco'));
         $form->text('telemovel', __('Telemovel'));

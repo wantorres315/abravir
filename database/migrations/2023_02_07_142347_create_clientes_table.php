@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nacionalidade');
             $table->date('nascimento');
             $table->string('telefone');
+            $table->string('telemovel');
             $table->text('endereco');
             $table->string('cep');
             $table->string('tipo_documento');

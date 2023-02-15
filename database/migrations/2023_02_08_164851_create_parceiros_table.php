@@ -21,12 +21,14 @@ return new class extends Migration
             $table->string('site')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
+            $table->text('email')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('telefone')->nullable();
             $table->string('endereco')->nullable();
             $table->string('telemovel')->nullable();
             $table->string('horario_atendimento')->nullable();
             $table->text('observacoes')->nullable();
+            $table->integer('ordem')->default(0);
             $table->timestamps();
         });
     }

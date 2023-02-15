@@ -35,8 +35,8 @@ class ClienteController extends AdminController
         $grid->column('id', __('ID'))->sortable();
 
         $grid->column('nome', __('Nome'))->expand(function ($model) {
-
-            $dependentes = $model->dependentes()->map(function ($dependente) {
+            echo ($model->getKey());
+            $dependentes = $model->dependentes($model->getKey())->map(function ($dependente) {
                 return $dependente->only(['nome', 'parentesco','nascimento']);
             });
         

@@ -59,7 +59,7 @@ class ConfiguracaoController extends AdminController
 
        
         $form->text('nome', __('Nome'));
-        $form->text('valor', __('Valor'));
+        $form->ckeditor('valor', __('Valor'));
         $form->text('tipo', __('Tipo'));
         $form->text('ordem', __('Ordem'));
         return $form;

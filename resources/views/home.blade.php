@@ -15,7 +15,19 @@
           </div>
         </div>
       </section>
-
+      <section class="bg-white">
+        <div class="shell-fluid shell-condensed">
+          <div class="range range-condensed">
+            <div class="cell-md-12 cell-md-12-mod-1 text-center jumbotron-custom-3 bg-white bg-image" style="">
+              <div class="image-wrap-inner">
+                <h2>{{getConfig('text_sobre')->valor}}</h2>
+                <p class="big">{!!getConfig('descricao_inicial_sobre')->valor!!}</p><a class="btn btn-style-1 btn-primary" href="{{getConfig('Sobre-nós')->valor}}">{{getConfig('Sobre-nós')->nome}}</a>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </section>
      <section class="section-lg bg-periglacial-blue text-center">
         <div class="shell">
           <div class="range range-sm-center range-75">
@@ -128,67 +140,49 @@
           </div>
         </div>
       </section>
-
-     <section class="section-xl bg-gray-dark bg-image text-center" style="background-image: url(images/bg-image-1.jpg);">
-        <div class="shell">
-          <div class="range range-50">
-            <div class="cell-xs-12">
-              <h2>Nossos Parceiros</h2>
-              <div class="p text-width-medium">
-                <p class="big">We employ only highly qualified barbers who are not just professionals, but also enjoy maintaining the atmosphere of a classic barbershop.</p>
+      <section class="box-wrap box-wrap-md bg-white">
+              <div class="box-wrap-map" style = "background-color:#b1c7cf">
+                
               </div>
-            </div>
-            <div class="cell-xs-12">
-              <div class="range range-30">
-                <div class="cell-sm-6 cell-md-4 height-fill">
-                  <div class="thumbnail-card"><img class="thumbnail-card-image" src="images/barbers-1-370x310.jpg" alt="" width="370" height="310"/>
-                    <div class="thumbnail-card-body">
-                      <p class="thumbnail-card-header" data-toggle="modal" data-target="#modalWindow">simon Wilson</p>
-                      <div class="thumbnail-card-text">
-                        <p>Mr. Wilson is the founder and owner of our barbershop.</p>
+              <div class="box-wrap-content">
+                <div class="shell">
+                  <div class="range">
+                    <div class="cell-xs-12">
+                      <div class="box-contacts box-contacts-horizontal box-wrap-content-interactive">
+                      <div class="box-contacts-col">
+                          <div class="box-contacts-block">
+                            <h3>{!!getConfig('texto_endereco')->valor!!}</h3>
+                            <address>{!!getConfig('endereco')->valor!!}</address>
+                          </div>
+                          <div class="divider divider-nebula"></div>
+                          <h3>{!!getConfig('texto_fale_conosco')->valor!!}</h3>
+                            <p>{!!getConfig('fale_conosco')->valor!!}</p>
+                        </div>
+                        <div class="box-contacts-col box-contacts-right">
+                          <div class="box-contacts-block">
+                            
+                            <form class="rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php" novalidate="novalidate">
+                              <div class="form-group">
+                                <label class="form-label-outside" for="contact-full-name">Nome Completo</label>
+                                <input class="form-control form-control-has-validation form-control-last-child" id="contact-full-name" type="text" name="name" ><span class="form-validation"></span>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label-outside" for="contact-phone">Telefone</label>
+                                <input class="form-control form-control-has-validation form-control-last-child" id="contact-phone" type="text" name="phone" ><span class="form-validation"></span>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label-outside" for="contact-phone">Mensagem</label>
+                                <textarea class="form-control form-control-has-validation form-control-last-child" id="message" type="text" name="message" ></textarea><span class="form-validation"></span>
+                              </div>
+                              <button class="btn btn-sm btn-primary btn-block btn-circle" type="submit">{!!getConfig('enviar')->valor!!}</button>
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                      <ul class="inline-list inline-list-md">
-                        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-                        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-                        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="cell-sm-6 cell-md-4 height-fill">
-                  <div class="thumbnail-card"><img class="thumbnail-card-image" src="images/barbers-2-370x310.jpg" alt="" width="370" height="310"/>
-                    <div class="thumbnail-card-body">
-                      <p class="thumbnail-card-header" data-toggle="modal" data-target="#modalWindow">Harry Anderson</p>
-                      <div class="thumbnail-card-text">
-                        <p>Harry brings a detailed, meticulous approach to styling.</p>
-                      </div>
-                      <ul class="inline-list inline-list-md">
-                        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-                        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-                        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="cell-sm-6 cell-md-4 height-fill">
-                  <div class="thumbnail-card"><img class="thumbnail-card-image" src="images/barbers-3-370x310.jpg" alt="" width="370" height="310"/>
-                    <div class="thumbnail-card-body">
-                      <p class="thumbnail-card-header" data-toggle="modal" data-target="#modalWindow">Matthew phillips</p>
-                      <div class="thumbnail-card-text">
-                        <p>Matthew has several years of experience in the barber industry.</p>
-                      </div>
-                      <ul class="inline-list inline-list-md">
-                        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-                        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-                        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="cell-xs-12"><a class="btn btn-sm btn-style-1 btn-primary" href="barbers.html">VIEW all team</a></div>
-          </div>
-        </div>
-      </section>
+            </section>
+      @include('modulos.parceiros')
 @endsection
