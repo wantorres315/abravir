@@ -13,9 +13,11 @@ Route::group([
 
     $router->resource('associados', ClienteController::class);
     $router->resource('parentesco', ParentescoController::class);
-    $router->resource('configuracao', ConfiguracaoController::class);
+    $router->resource('textos', TextoController::class);
+    $router->resource('config', ConfigController::class);
     $router->resource('parceiros', ParceirosController::class);
-
+    $router->resource('financeiro', FinanceiroController::class);
+    $router->resource('servicos', ServicosController::class);
     $router->get('/', 'HomeController@index')->name('home');
    
 });

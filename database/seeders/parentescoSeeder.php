@@ -16,9 +16,10 @@ class parentescoSeeder extends Seeder
     public function run()
     {
         DB::table('parentesco')->insert([
-            'nome' => 'pai/mãe'
+            'nome' => 'Marido/Esposa'
            
         ]);
+        
         DB::table('parentesco')->insert([
             'nome' => 'filho/filha'
            
@@ -39,5 +40,14 @@ class parentescoSeeder extends Seeder
             'nome' => 'avô/avó'
            
         ]);
+        DB::table('parentesco')->insert([
+            'nome' => 'pai/mãe'
+           
+        ]);
+        DB::table('parentesco')->insert([
+            'nome' => 'Sogro/Sogra'
+           
+        ]);
+        
     }
 }

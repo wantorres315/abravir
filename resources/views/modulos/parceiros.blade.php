@@ -3,10 +3,10 @@
           <div class="range range-50">
             <div class="cell-xs-12">
               @if(empty($show_all))
-                <h2>{{ getConfig('text_parceiros')->valor }}</h2>
+                <h2>{{ getText('text_parceiros')}}</h2>
               @endif
               <div class="p text-width-medium">
-                <p class="big">{{ getConfig('descricao_parceiros')->valor }}</p>
+                <p class="big">{{ getText('descricao_parceiros')}}</p>
               </div>
             </div>
             <div class="cell-xs-12">
@@ -51,7 +51,7 @@
               </div>
             </div>
             @if(empty($show_all))
-            <div class="cell-xs-12"><a class="btn btn-sm btn-style-1 btn-primary" href="/parceiros">{{ getConfig('botao_ver_parceiros')->valor }}</a></div>
+            <div class="cell-xs-12"><a class="btn btn-sm btn-style-1 btn-primary" href="/parceiros">{{ getText('botao_ver_parceiros') }}</a></div>
             @endif
           </div>
         </div>

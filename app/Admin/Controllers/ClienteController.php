@@ -35,11 +35,10 @@ class ClienteController extends AdminController
         $grid->column('id', __('ID'))->sortable();
 
         $grid->column('nome', __('Nome'))->expand(function ($model) {
-            echo ($model->getKey());
+         
             $dependentes = $model->dependentes($model->getKey())->map(function ($dependente) {
                 return $dependente->only(['nome', 'parentesco','nascimento']);
             });
-        
             return new Table([ 'nome','parentesco' ,'nascimento'], $dependentes->toArray());
         });
        
@@ -49,15 +48,12 @@ class ClienteController extends AdminController
             return "$email";
         });
         $grid->column('dependentesCount', 'Nº de Dependentes')->display(function ($dependentes) {
-         
             $count = count($dependentes);
             return $count;
         });
         
-       
         $grid->paginate(15);
         $grid->disableCreateButton();
-        
         $grid->actions(function ($actions) {
             $actions->disableDelete();
             $actions->disableEdit();

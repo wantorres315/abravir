@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Configuracao;
+use App\Models\Servico;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class ConfiguracaoController extends AdminController
+class ServicosController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Configuracao';
+    protected $title = 'Servico';
 
     /**
      * Make a grid builder.
@@ -24,12 +24,13 @@ class ConfiguracaoController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Configuracao());
-        $grid->column('id', __('ID'))->sortable();
-        $grid->column('nome', __('Nome'))->sortable();
-        $grid->column('valor', __('Valor'))->sortable();
-        $grid->column('tipo', __('Tipo'))->sortable();
-        $grid->column('ordem', __('Ordem'))->sortable();
+        $grid = new Grid(new Servico());
+
+        $grid->column('id', __('Id'));
+        $grid->column('nome', __('Nome'));
+        $grid->column('descricao', __('Descricao'));
+     
+
         return $grid;
     }
 
@@ -41,9 +42,13 @@ class ConfiguracaoController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Configuracao::findOrFail($id));
+        $show = new Show(Servico::findOrFail($id));
 
-
+        $show->field('id', __('Id'));
+        $show->field('nome', __('Nome'));
+        $show->field('descricao', __('Descricao'));
+        $show->field('created_at', __('Created at'));
+        $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
@@ -55,13 +60,11 @@ class ConfiguracaoController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Configuracao());
+        $form = new Form(new Servico());
 
-       
         $form->text('nome', __('Nome'));
-        $form->ckeditor('valor', __('Valor'));
-        $form->text('tipo', __('Tipo'));
-        $form->text('ordem', __('Ordem'));
+        $form->text('descricao', __('Descricao'));
+
         return $form;
     }
 }

@@ -28,4 +28,6 @@ class Cliente extends Model
         
         return $dependentes;
     }
+
+    
 }

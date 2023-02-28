@@ -1,6 +1,6 @@
 @extends('layout.internas')
 
-@section('title', getConfig('text_parceiros')->valor)
+@section('title', getText('text_parceiros'))
 
 @section('content')
       @include('modulos.parceiros')

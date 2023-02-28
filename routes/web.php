@@ -22,3 +22,5 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/parceiros', [HomeController::class, 'parceiros']);
 Route::get('/associar', [HomeController::class, 'associar']);
 Route::post('/associar', [HomeController::class, 'save']);
+Route::post('/fale_conosco', [HomeController::class, 'fale_conosco']);
+Route::get('/sobre', [HomeController::class, 'sobre']);

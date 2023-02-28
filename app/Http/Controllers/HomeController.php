@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Parceiros;
 use App\Models\Cliente;
+use App\Mail\FaleConoscoMail;
+use App\Mail\ClienteMail;
+use App\Mail\NovoClienteMail;
+use App\Models\Dependentes;
+use App\Models\ValoresPagar;
+use App\Models\Servico;
+use Illuminate\Support\Facades\Mail;
+
 
 class HomeController extends Controller
 {
@@ -27,7 +35,8 @@ class HomeController extends Controller
 
     public function sobre()
     {
-        return view('sobre');
+        $servicos = Servico::all();
+        return view('sobre', ['servicos' => $servicos]);
     }
     public function associar()
     {
@@ -46,11 +55,65 @@ class HomeController extends Controller
         $cliente->documento = $request->input('documento');
         $cliente->cep = $request->input('codigo_postal');
         $cliente->endereco = $request->input('endereco');
+        $descricao_pagar = "<b>Pagamento referente ao ano de ".date("Y")."</b><br> Associados: <br>".$request->input('nome')."- Valor : €12.00";
+        $valor_pagar = 12;
         $acordo = 0;
         if($request->input('acordo')){
             $acordo = 1;
         }
         $cliente->regulamento = $acordo;
         $cliente->save();
+       
+        $dependentesConta = count($request->input('nome_dependente')); 
+        $arrayDependente = [];
+        if( $dependentesConta > 0 ){
+
+            for( $i=0; $i < $dependentesConta; $i++){
+                if($request->input('nome_dependente')[$i] != null){
+
+                    $dependente = new Dependentes();
+                    $dependente->nome = $request->input('nome_dependente')[$i];
+                    $dependente->nascimento = $request->input('nascimento_dependente')[$i];
+                    $dependente->parentesco_id = $request->input('parentesco_dependente')[$i];
+                    $dependente->cliente_id = $cliente->id;
+                    if(verifica_nascimento($request->input('nascimento_dependente')[$i]) == 'menor'){
+                        $descricao_pagar = $descricao_pagar."<br>".$request->input('nome_dependente')[$i]."- Valor :€5.00";
+                        $valor_pagar = $valor_pagar+5;
+                    }else{
+                        $descricao_pagar = $descricao_pagar."<br>".$request->input('nome_dependente')[$i]."- Valor :€12.00";
+                        $valor_pagar = $valor_pagar+12;
+                    }
+                    $arrayDependente[] = $dependente;
+                    $dependente->save();
+                }
+                
+                
+            }
+            
+            
+        }
+        $valores_pagar = new ValoresPagar();
+        $valores_pagar->cliente_id = $cliente->id;
+        $valores_pagar->valor = $valor_pagar;
+        $valores_pagar->descricao = $descricao_pagar;
+        $valores_pagar->save();
+
+        return view('confirmacao_associar', ['cliente' => $cliente, 'valores'=> $valores_pagar, 'dependentes'=> $arrayDependente]);
+
+       // $user = getConfiguration('email_envio_fale_conosco')->valor;
+       // Mail::to($user)->send(new NovoClienteMail($cliente));
+       // Mail::to($cliente->email)->send(new ClienteMail($cliente, $valores_pagar));
+        //dd('salvei mas não saia da tela');
+
     }
+
+    public function fale_conosco(Request $request){
+        $user = getConfiguration('email_envio_fale_conosco')->valor;
+       
+        Mail::to($user)->send(new FaleConoscoMail($request));
+    }
+    
+
+    
+   
 }
