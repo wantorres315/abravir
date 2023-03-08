@@ -18,6 +18,7 @@ Route::group([
     $router->resource('parceiros', ParceirosController::class);
     $router->resource('financeiro', FinanceiroController::class);
     $router->resource('servicos', ServicosController::class);
+    $router->resource('equipe', EquipesController::class);
     $router->get('/', 'HomeController@index')->name('home');
    
 });

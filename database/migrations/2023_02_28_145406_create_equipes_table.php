@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('email')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
+            $table->string('cargo');
             $table->integer('ordem')->default(0);
             $table->timestamps();
         });

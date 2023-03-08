@@ -11,6 +11,7 @@ use App\Mail\NovoClienteMail;
 use App\Models\Dependentes;
 use App\Models\ValoresPagar;
 use App\Models\Servico;
+use App\Models\Equipes;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -36,7 +37,8 @@ class HomeController extends Controller
     public function sobre()
     {
         $servicos = Servico::all();
-        return view('sobre', ['servicos' => $servicos]);
+        $equipe = Equipes::all();
+        return view('sobre', ['servicos' => $servicos, 'equipes' => $equipe]);
     }
     public function associar()
     {

@@ -15,36 +15,36 @@ class parentescoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'Marido/Esposa'
            
         ]);
         
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'filho/filha'
            
         ]);
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'irmão/irmã'
            
         ]);
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'primo'
            
         ]);
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'cunhado/cunhada'
            
         ]);
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'avô/avó'
            
         ]);
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'pai/mãe'
            
         ]);
-        DB::table('parentesco')->insert([
+        DB::table('parentescos')->insert([
             'nome' => 'Sogro/Sogra'
            
         ]);
