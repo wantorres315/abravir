@@ -22,7 +22,7 @@
       <main class="page-content" id="perspective">
         <div class="content-wrapper">
           <div class="page-header page-header-perspective">
-            <div class="page-header-left"><a class="brand" href="index.html"><img src="images/logo.png" alt="" width="50" height="50"/></a></div>
+            <div class="page-header-left"><a class="brand" href="/"><img src="images/logo.png" alt="" width="50" height="50"/></a></div>
             <div class="page-header-right">
               <div class="booking-control"><a class="btn btn-xs btn-circle btn-primary" href="{{getConfig('associe-se')->valor}}">{{getConfig('associe-se')->nome}}</a></div>
               <div id="perspective-open-menu" data-custom-toggle=".perspective-menu-toggle" data-custom-toggle-hide-on-blur="true"><span class="perspective-menu-text">Menu</span>
@@ -47,7 +47,7 @@
                 <div class="range range-xs-center">
                   <div class="cell-lg-10"><a class="brand" href="/"><img src="images/logo.png" alt="" width="150" height="150"/></a>
                     <div class="text-highlighted-wrap">
-                      <p class="text-highlighted">{{getConfig('texto_footer')->valor}}</p>
+                      <p class="text-highlighted">{!! getConfig('texto_footer')->valor !!}</p>
                     </div>
                     @php
                      $menu = getConfigByType('menu');
@@ -57,12 +57,22 @@
                       <li @if($k == 0) class="active" @endif><a href="{{$me['valor']}}">{{$me['nome']}}</a></li>
                     @endforeach
                     </ul>
+
+
                     <div class="divider divider-small divider-light block-centered"></div>
                     <ul class="inline-list inline-list-md">
-                      <li><a class="icon icon-xs link-gray-light fa-facebook" href="#"></a></li>
-                      <li><a class="icon icon-xs link-gray-light fa-twitter" href="#"></a></li>
-                      <li><a class="icon icon-xs link-gray-light fa-youtube" href="#"></a></li>
-                      <li><a class="icon icon-xs link-gray-light fa-linkedin" href="#"></a></li>
+                      @if(!empty(getConfiguration('facebook')))
+                        <li><a class="icon icon-xs link-gray-light fa-facebook" target = "_blank" href="{{getConfiguration('facebook')->valor}}"></a></li>
+                        @endif
+                @if(!empty(getConfiguration('twitter')))
+                      <li><a class="icon icon-xs link-gray-light fa-twitter"  target = "_blank" href="{{getConfiguration('twitter')->valor}}"></a></li>
+                      @endif
+                @if(!empty(getConfiguration('youtube')))
+                      <li><a class="icon icon-xs link-gray-light fa-youtube" target = "_blank" href="{{getConfiguration('youtube')->valor}}"></a></li>
+                      @endif
+                @if(!empty(getConfiguration('instagram')))
+                      <li><a class="icon icon-xs link-gray-light fa-instagram" target = "_blank" href="{{getConfiguration('instagram')->valor}}"></a></li>
+                      @endif
                     </ul>
                   </div>
                 </div>
@@ -77,7 +87,7 @@
             <div class="rd-navbar-inner">
               <div class="rd-navbar-panel">
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/logo-default-dark-200x36.png" alt="" width="200" height="36"/></a></div>
+                <div class="rd-navbar-brand"><a class="brand-name" href="/"><img src="images/logo.png" alt="" width="200" height="36"/></a><span style = "position: relative;margin: 10px;top: 3px;"class = "title">ABRAVIR</span></div>
               </div>
               <div class="rd-navbar-nav-wrap">
                 <div class="rd-navbar-nav-inner">
@@ -90,15 +100,25 @@
                    
                    
                   </ul>
+
+               
                   <div class="rd-navbar-nav-footer">
                     <ul class="inline-list inline-list-md">
-                      <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-                      <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-                      <li><a class="icon icon-xs link-gray-base fa-youtube" href="#"></a></li>
-                      <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
+                    @if(!empty(getConfiguration('facebook')))
+                      <li><a class="icon icon-xs link-gray-base fa-facebook" target = "_blank" href="{{getConfiguration('facebook')->valor}}"></a></li>
+                      @endif
+                @if(!empty(getConfiguration('twitter')))
+                      <li><a class="icon icon-xs link-gray-base fa-twitter" target = "_blank" href="{{getConfiguration('twitter')->valor}}"></a></li>
+                      @endif
+                @if(!empty(getConfiguration('youtube')))
+                      <li><a class="icon icon-xs link-gray-base fa-youtube" target = "_blank" href="{{getConfiguration('youtube')->valor}}"></a></li>
+                      @endif
+                @if(!empty(getConfiguration('instagram')))
+                      <li><a class="icon icon-xs link-gray-base fa-instagram" target = "_blank"  href="{{getConfiguration('instagram')->valor}}"></a></li>
+                      @endif
                     </ul>
                   </div>
-                  <div class="rd-navbar-secondary"><a class="btn btn-xs btn-circle btn-primary" href="step-1.html">BOOK NOW</a></div>
+                  
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +24,7 @@ Route::get('/associar', [HomeController::class, 'associar']);
 Route::post('/associar', [HomeController::class, 'save']);
 Route::post('/fale_conosco', [HomeController::class, 'fale_conosco']);
 Route::get('/sobre', [HomeController::class, 'sobre']);
+Route::get('/noticias', [HomeController::class, 'noticias']);
+Route::get('/cancela_associacao/{id}', [HomeController::class, 'cancela_associacao']);
+Route::get('/confirma_associacao/{id}', [HomeController::class, 'confirma_associacao']);
+Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF']);

@@ -12,6 +12,7 @@ use App\Models\Dependentes;
 use App\Models\ValoresPagar;
 use App\Models\Servico;
 use App\Models\Equipes;
+use App\Models\Noticia;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -25,7 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         $parceiros = Parceiros::limit(3)->get();
-        return view('home', ['parceiros' => $parceiros]);
+        $noticias = Noticia::limit(3)->orderBy('created_at','desc')->get();
+        $titulo_noticia = getConfig('text_noticias_home')->valor;
+        return view('home', ['parceiros' => $parceiros, 'noticias' => $noticias, 'titulo_noticia'=>$titulo_noticia]);
     }
 
     public function parceiros()
@@ -57,7 +60,54 @@ class HomeController extends Controller
         $cliente->documento = $request->input('documento');
         $cliente->cep = $request->input('codigo_postal');
         $cliente->endereco = $request->input('endereco');
-        $descricao_pagar = "<b>Pagamento referente ao ano de ".date("Y")."</b><br> Associados: <br>".$request->input('nome')."- Valor : €12.00";
+        $anoInicial = date("Y");
+        $anoFinal = date("Y")+1;
+        $month = date("m");
+        
+        $cliente->validade = $anoFinal."-".$month."-".date('d'); 
+        
+        switch ($month) {
+            case '1':
+                $mesAtual = 'Janeiro';
+                break;
+            case '2':
+                $mesAtual = 'Fevereiro';
+                break;
+            case '3':  
+                $mesAtual = 'Março';
+                break;  
+            case '4':  
+                $mesAtual = 'Abril';
+                break;  
+            case '5':
+                $mesAtual = 'Maio';
+                break;
+            case '6':
+                $mesAtual = 'Junho';
+                break;
+            case '7':
+                $mesAtual = 'Julho';
+                break;
+            case '8':
+                $mesAtual = 'Agosto';
+                break;
+            case '9':
+                $mesAtual = 'Setembro';
+                break;
+            case '10':
+                $mesAtual = 'Outubro';
+                break;
+            case '11':
+                $mesAtual = 'Novembro';
+                break;
+            case '12':
+                $mesAtual = 'Dezembro';
+                break;
+            default:
+                # code...
+                break;
+        } 
+        $descricao_pagar = "<b>Valores equivalentes do Mẽs de ".$mesAtual." ano de ".$anoInicial." até ".$mesAtual." de ".$anoFinal."</b><br> Associados: <br>".$request->input('nome')."- Valor : €12.00";
         $valor_pagar = 12;
         $acordo = 0;
         if($request->input('acordo')){
@@ -65,8 +115,12 @@ class HomeController extends Controller
         }
         $cliente->regulamento = $acordo;
         $cliente->save();
-       
-        $dependentesConta = count($request->input('nome_dependente')); 
+        
+        $dependentesConta = 0;
+        if(!empty($request->input('nome_dependente'))){
+            $dependentesConta = count($request->input('nome_dependente')); 
+        }
+        
         $arrayDependente = [];
         if( $dependentesConta > 0 ){
 
@@ -102,11 +156,7 @@ class HomeController extends Controller
 
         return view('confirmacao_associar', ['cliente' => $cliente, 'valores'=> $valores_pagar, 'dependentes'=> $arrayDependente]);
 
-       // $user = getConfiguration('email_envio_fale_conosco')->valor;
-       // Mail::to($user)->send(new NovoClienteMail($cliente));
-       // Mail::to($cliente->email)->send(new ClienteMail($cliente, $valores_pagar));
-        //dd('salvei mas não saia da tela');
-
+       
     }
 
     public function fale_conosco(Request $request){
@@ -114,8 +164,30 @@ class HomeController extends Controller
        
         Mail::to($user)->send(new FaleConoscoMail($request));
     }
-    
 
+    public function noticias(){
+        $noticias = Noticia::all();
+        return view('noticias', ['noticias' => $noticias, 'show_all' => true]);
+    }
+    
+    public function cancela_associacao($id){
+        
+        $valor_pagar = ValoresPagar::where('cliente_id',$id)->delete();
+        $dependentes = Dependentes::where('cliente_id',$id)->delete();
+        $cliente = Cliente::find($id)->delete();
+        return redirect('/associar');
+
+    }
+    public function confirma_associacao($id){
+        $cliente = Cliente::find($id);
+        $valores_pagar = ValoresPagar::where('cliente_id',$id)->first();
+        $user = getConfiguration('email_envio_fale_conosco')->valor;
+        Mail::to($user)->send(new NovoClienteMail($cliente));
+        Mail::to($cliente->email)->send(new ClienteMail($cliente, $valores_pagar));
+        return redirect('/associar?cadastrado=true');
+
+
+    }
     
    
 }

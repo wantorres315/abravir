@@ -52,10 +52,15 @@
                         <div class="quote-review-header">
                           <p class="quote-review-title">{{$equipe->nome}} </p>
                           <ul class="quote-review-rating">
-                            <li class="icon icon-xs icon-primary fa fa-facebook"></li>
-                            <li class="icon icon-xs icon-primary fa fa-envelope"></li>
-                            <li class="icon icon-xs icon-primary fa fa-instagram"></li>
-                          
+                            @if(!empty($equipe->facebook))
+                            <a href = "{{$equipe->facebook}}" target = "_blank"><li class="icon icon-xs icon-primary fa fa-facebook"></li></a>
+                            @endif
+                            @if(!empty($equipe->email))
+                            <a href = "mailto:{{$equipe->email}}"><li class="icon icon-xs icon-primary fa fa-envelope"></li></a>
+                            @endif
+                            @if(!empty($equipe->instagram))
+                            <a href = "{{$equipe->instagram}}" target = "_blank"><li class="icon icon-xs icon-primary fa fa-instagram"></li></a>
+                            @endif
                           </ul>
                         </div>
                         <div class="quote-review-meta"><span class="quote-review-user">{{$equipe->cargo}}</span>

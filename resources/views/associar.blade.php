@@ -5,58 +5,70 @@
 @section('content')
 
            
+            @if(!empty($_GET['cadastrado']))           
+            @if($_GET['cadastrado'] == true)
+              <div class="shell  text-center">
+               
+                    <div class="text-highlighted-wrap">
+                      <p class="text-highlighted">{!! getConfig('cadastro_sucesso')->valor !!}</p>
+                    </div>
+                   
+                  
+                 
+               
+              </div>
+              @endif  
+            @endif
            
-
-           
-            <section class="section-xl bg-periglacial-blue text-center">
+            <section class=" bg-periglacial-blue">
               <div class="shell">
                 <div class="range range-sm-center">
                   <div class="cell-sm-12 cell-md-12 cell-lg-12">
              
                     <!-- RD Mailform-->
-                    <form class="rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="/associar">
+                    <form method="post" action="/associar">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                       <div class="range range-sm-bottom range-15">
                         <div class="cell-sm-12">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-first-name">Nome Completo <m style = "color:red">*</m></label>
-                            <input class="form-control" id="nome_completo" required type="text" name="nome" >
+                            <input class="form-control" id="nome_completo" required type="text" value = "Wanessa" name="nome" >
                           </div>
                         </div>
                         <div class="cell-sm-4">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">E-mail <m style = "color:red">*</m></label>
-                            <input class="form-control" id="email" required type="email" name="email" >
+                            <input class="form-control" id="email" required type="email" value = "wanessa.araujo.torres@gmail.com" name="email" >
                           </div>
                         </div>
                         <div class="cell-sm-4">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">Telefone <m style = "color:red">*</m></label>
-                            <input class="form-control" id="telefone"required  type="text" name="telefone" >
+                            <input class="form-control" id="telefone" required type="text" value = "46055576" name="telefone" >
                           </div>
                         </div>
                         <div class="cell-sm-4">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">Telemovel <m style = "color:red">*</m></label>
-                            <input class="form-control" id="telemovel" required type="text" name="telemovel" >
+                            <input class="form-control" id="telemovel" required type="text" value = "913521912" name="telemovel" >
                           </div>
                         </div>
                         <div class="cell-sm-6">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">Nacionalidade <m style = "color:red">*</m></label>
-                            <input class="form-control" id="nacionalidade" required type="text" name="nacionalidade" >
+                            <input class="form-control" id="nacionalidade" required type="text" name="nacionalidade" value = "brasileira" >
                           </div>
                         </div>
                         <div class="cell-sm-6">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">Data de Nascimento <m style = "color:red">*</m></label>
-                            <input class="form-control" id="nascimento" required type="date" name="nascimento" >
+                            <input class="form-control" id="nascimento" required type="date" name="nascimento"  value = "1985-02-26">
                           </div>
                         </div>
                         <div class="cell-sm-4">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">Documento de Identificação <m style = "color:red">*</m></label>
-                            <input  id="contact-email" type="radio" value = "passaporte" checked name="doc_type" >Passaporte
+                            <input  id="contact-email" type="radio" value = "passaporte" name="doc_type" >Passaporte
                             <input  id="contact-email" type="radio" value = "nif" checked name="doc_type" >NIF
                             <input  id="contact-email" type="radio" value = "outro" name="doc_type" >Outro
                           </div>
@@ -64,19 +76,19 @@
                         <div class="cell-sm-4">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">Numero do Documento <m style = "color:red">*</m></label>
-                            <input class="form-control" id="numero_documento" required type="text" name="documento" >
+                            <input class="form-control" id="numero_documento" value = "309993792" required type="text" name="documento" >
                           </div>
                         </div>
                         <div class="cell-sm-4">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-last-name">Código Postal <m style = "color:red">*</m></label>
-                            <input class="form-control" id="codigo_postal" required type="text" name="codigo_postal" >
+                            <input class="form-control" id="codigo_postal" value = "5000-058" required type="text" name="codigo_postal" >
                           </div>
                         </div>
                         <div class="cell-xs-12">
                           <div class="form-group">
                             <label class="form-label-outside" for="contact-message">Endereço Completo (Morada) <m style = "color:red">*</m></label>
-                            <textarea class="form-control" id="endereco" required name="endereco" ></textarea>
+                            <textarea class="form-control" id="endereco" required name="endereco" >Rua A, 5</textarea>
                           </div>
                         </div>
                         <div class="cell-xs-12">
@@ -96,7 +108,7 @@
                           </div>
                         </div>
                         <div class="cell-sm-12 offset-custom-1">
-                          <button class="btn btn-sm btn-primary btn-block btn-circle form_enviar" type="button">Efetuar Cadastro</button>
+                          <button class="btn btn-sm btn-primary btn-block btn-circle form_enviar" type="submit">Efetuar Cadastro</button>
                         </div>
                       </div>
                     </form>

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('cep');
             $table->string('tipo_documento');
             $table->string('documento');
-            $table->integer('dependentes');
+            $table->date('validade');
             $table->string('ativo')->default('não');
             $table->timestamps();
         });

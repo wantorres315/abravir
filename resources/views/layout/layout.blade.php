@@ -69,43 +69,32 @@
               <h3>{{getConfig('nome_site')->valor}}</h3>
               <div class="divider divider-conch"></div>
               <div class="text-highlighted-wrap">
-                <p class="text-highlighted">{{getConfig('texto_footer')->valor}}</p>
+                <p class="text-highlighted">{!! getConfig('texto_footer')->valor !!}</p>
               </div>
             </div>
             <div class="cell-sm-6 cell-md-3">
               <h3>{{getConfig('texto_siganos')->valor}}</h3>
               <div class="divider divider-conch"></div>
               <ul class="inline-list inline-list-xs">
-                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="#"></a></li>
-                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-twitter" href="#"></a></li>
-                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" href="#"></a></li>
-                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-linkedin" href="#"></a></li>
+                @if(!empty(getConfiguration('facebook')))
+                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" target = "_blank" href="{{getConfiguration('facebook')->valor}}"></a></li>
+                @endif
+                @if(!empty(getConfiguration('twitter')))
+                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-twitter" target = "_blank" href="{{getConfiguration('twitter')->valor}}"></a></li>
+                @endif
+                @if(!empty(getConfiguration('youtube')))
+                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" target = "_blank" href="{{getConfiguration('youtube')->valor}}"></a></li>
+                @endif
+                @if(!empty(getConfiguration('instagram')))
+                <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-instagram" target = "_blank" href="{{getConfiguration('instagram')->valor}}"></a></li>
+                @endif
               </ul>
             </div>
           </div>
         </div>
       </footer>
     </div>
-    <div class="modal fade text-center" id="modalWindow" role="dialog">
-      <div class="modal-dialog custom-modal-dialog">
-        <div class="custom-modal-content">
-          <button class="close" type="button" data-dismiss="modal"></button>
-          <div class="shell">
-            <div class="box-portfolio"><img class="box-portfolio-image" src="images/barbers-single-1-130x130.jpg" alt="" width="130" height="130"/>
-              <p class="box-portfolio-header">simon wilson</p>
-              <div class="box-portfolio-text">
-                <p>Simon Wilson founded Barbershop in 2003 at the age of 23. He decided to establish a place where the long standing traditions of American barbering could be saved. He kept Barbershop a true place for men, their fathers, and sons, rather than converting it to a unisex salon as was the popular trend at the time. Over the past 13 years, Mr. Wilson has grown his shop from a small, local spot to a nationally and internationally recognized standard in the industry. Simon has been the recipient of various accolades including the HYPE Award for Entrepreneurs and the Hartford Business Journal's 40 Under Forty (Class of 2014). He can be found at the shop on Wednesdays and Fridays.</p>
-              </div>
-              <ul class="inline-list inline-list-md">
-                <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-                <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-                <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+   
     <div class="snackbars" id="form-output-global"></div>
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="pswp__bg"></div>
