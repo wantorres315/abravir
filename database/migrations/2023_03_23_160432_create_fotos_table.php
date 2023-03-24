@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('doacoes', function (Blueprint $table) {
+        Schema::create('fotos', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('nome_doador');
-            $table->string('nome_receptor');
-            $table->decimal('valor',9,2);
-            $table->integer('doado');
+            $table->bigInteger('galeria_id');
+            $table->string('texto')->nullable();
+            $table->text('foto');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doacoes');
+        Schema::dropIfExists('fotos');
     }
 };

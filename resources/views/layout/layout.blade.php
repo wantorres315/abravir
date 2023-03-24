@@ -2,16 +2,16 @@
 <html class="wide wow-animation" lang="en">
   <head>
     <!-- Site Title-->
-    <title>Home</title>
+    <title>@yield('title')</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="csrf_token" content="{{ csrf_token() }}" />
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ URL::asset('images/favicon.ico')}}" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Mono:300,300italic,400,700%7CArvo:400,700">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css')}}">
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -26,9 +26,9 @@
               <div class="rd-navbar-panel">
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                 <div class="rd-navbar-brand"><a class="brand-name" href="/">
-                    <div class="brand-mobile"><img src="images/logo.png" alt="" width="200" height="36" style = "border-radius:50%"/>
+                    <div class="brand-mobile"><img src="{{ URL::asset('images/logo.png')}}" alt="" width="200" height="36" style = "border-radius:50%"/>
                     </div>
-                    <div class="brand-desktop"><img src="images/logo.png" alt="" width="125" height="125" style = "border-radius:50%"/>
+                    <div class="brand-desktop"><img src="{{ URL::asset('images/logo.png')}}" alt="" width="125" height="125" style = "border-radius:50%"/>
                     </div></a></div>
               </div>
               <div class="rd-navbar-nav-wrap">
@@ -130,7 +130,7 @@
         </div>
       </div>
     </div>
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ URL::asset('js/core.min.js')}}"></script>
+    <script src="{{ URL::asset('js/script.js')}}"></script>
   </body>
 </html>

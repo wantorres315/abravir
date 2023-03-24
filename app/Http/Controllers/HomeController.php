@@ -170,6 +170,12 @@ class HomeController extends Controller
         return view('noticias', ['noticias' => $noticias, 'show_all' => true]);
     }
     
+    public function noticias_interna($id){
+        $noticia = Noticia::find($id);
+        $title = "noticia_interna";
+        return view('noticias_interna', ['noticia' => $noticia, 'title' => $title]);
+       
+    }
     public function cancela_associacao($id){
         
         $valor_pagar = ValoresPagar::where('cliente_id',$id)->delete();
@@ -185,8 +191,6 @@ class HomeController extends Controller
         Mail::to($user)->send(new NovoClienteMail($cliente));
         Mail::to($cliente->email)->send(new ClienteMail($cliente, $valores_pagar));
         return redirect('/associar?cadastrado=true');
-
-
     }
     
    

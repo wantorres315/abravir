@@ -20,6 +20,8 @@ Route::group([
     $router->resource('servicos', ServicosController::class);
     $router->resource('equipe', EquipesController::class);
     $router->resource('noticias', NoticiasController::class);
+    $router->resource('doacoes', DoacoesController::class);
+    $router->resource('momentos', GaleriasController::class);
     $router->get('/', 'HomeController@index')->name('home');
    
 });

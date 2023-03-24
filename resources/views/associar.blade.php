@@ -102,7 +102,7 @@
                         </div>
                         <div class="cell-sm-12">
                           <div class="form-group">
-                             <input  type="checkbox" name="acordo" id = "acordo" style = "float: left;margin-right: 10px;">
+                             <input  type="checkbox" required name="acordo" id = "acordo" style = "float: left;margin-right: 10px;">
                              <label class="form-label-outside" id = "label_acordo" for="contact-email">De acordo com o Regulamento Geral de Proteção de Dados, de 25 de maio de 2018, ao preencher este formulário concordo de maneira livre, informada e inequívoca com o tratamento dos meus dados pessoais somente para o fim de armazenamento, comunicação, inscrição e direcionamento  para as atividades da Associação de Brasileiros do Distrito de Vila Real.</label>
                           
                           </div>

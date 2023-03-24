@@ -25,6 +25,7 @@ Route::post('/associar', [HomeController::class, 'save']);
 Route::post('/fale_conosco', [HomeController::class, 'fale_conosco']);
 Route::get('/sobre', [HomeController::class, 'sobre']);
 Route::get('/noticias', [HomeController::class, 'noticias']);
+Route::get('/noticia/{id}', [HomeController::class, 'noticias_interna']);
 Route::get('/cancela_associacao/{id}', [HomeController::class, 'cancela_associacao']);
 Route::get('/confirma_associacao/{id}', [HomeController::class, 'confirma_associacao']);
 Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF']);

@@ -11,7 +11,8 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Mono:300,300italic,400,700%7CArvo:400,700">
-    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css')}}">
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -22,7 +23,7 @@
       <main class="page-content" id="perspective">
         <div class="content-wrapper">
           <div class="page-header page-header-perspective">
-            <div class="page-header-left"><a class="brand" href="/"><img src="images/logo.png" alt="" width="50" height="50"/></a></div>
+            <div class="page-header-left"><a class="brand" href="/"><img src="{{ URL::asset('images/logo.png')}}" alt="" width="50" height="50"/></a></div>
             <div class="page-header-right">
               <div class="booking-control"><a class="btn btn-xs btn-circle btn-primary" href="{{getConfig('associe-se')->valor}}">{{getConfig('associe-se')->nome}}</a></div>
               <div id="perspective-open-menu" data-custom-toggle=".perspective-menu-toggle" data-custom-toggle-hide-on-blur="true"><span class="perspective-menu-text">Menu</span>
@@ -31,6 +32,17 @@
             </div>
           </div>
           <div id="wrapper">
+          @php
+                  $show = 'true';
+                @endphp
+            @if(!empty($title))
+              @if($title == 'noticia_interna')
+                @php
+                  $show = 'false';
+                @endphp
+              @endif
+            @endif
+            @if($show == 'true')
             <div class="page-title">
               <div class="page-title-content">
                 <div class="shell">
@@ -38,6 +50,7 @@
                 </div>
               </div>
             </div>
+            @endif
             
             @yield('content', 'Default content')
            
@@ -45,7 +58,7 @@
             <footer class="page-footer page-footer-default">
               <div class="shell">
                 <div class="range range-xs-center">
-                  <div class="cell-lg-10"><a class="brand" href="/"><img src="images/logo.png" alt="" width="150" height="150"/></a>
+                  <div class="cell-lg-10"><a class="brand" href="/"><img src="{{ URL::asset('images/logo.png')}}" alt="" width="150" height="150"/></a>
                     <div class="text-highlighted-wrap">
                       <p class="text-highlighted">{!! getConfig('texto_footer')->valor !!}</p>
                     </div>
@@ -87,7 +100,7 @@
             <div class="rd-navbar-inner">
               <div class="rd-navbar-panel">
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                <div class="rd-navbar-brand"><a class="brand-name" href="/"><img src="images/logo.png" alt="" width="200" height="36"/></a><span style = "position: relative;margin: 10px;top: 3px;"class = "title">ABRAVIR</span></div>
+                <div class="rd-navbar-brand"><a class="brand-name" href="/"><img src="{{ URL::asset('images/logo.png')}}" alt="" width="200" height="36"/></a><span style = "position: relative;margin: 10px;top: 3px;"class = "title">ABRAVIR</span></div>
               </div>
               <div class="rd-navbar-nav-wrap">
                 <div class="rd-navbar-nav-inner">
@@ -161,7 +174,7 @@
         </div>
       </div>
     </div>
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ URL::asset('js/core.min.js')}}"></script>
+    <script src="{{ URL::asset('js/script.js')}}"></script>
   </body>
 </html>

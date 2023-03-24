@@ -11,7 +11,7 @@ use Request;
 Use Encore\Admin\Widgets\Table;
 use App\Admin\Actions\Post\Aprovar;
 use App\Admin\Actions\Post\Reprovar;
-
+use App\Admin\Actions\Post\Deletar;
 class ClienteController extends AdminController
 {
     /**
@@ -64,6 +64,7 @@ class ClienteController extends AdminController
             }else{
                 $actions->add(new Aprovar);
             }
+            $actions->add(new Deletar);
             
         });
         
