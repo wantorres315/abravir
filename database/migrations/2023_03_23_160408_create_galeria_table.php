@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->string('title');
             $table->string('resumo');
+            $table->text('capa');
             $table->timestamps();
         });
     }

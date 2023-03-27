@@ -30,6 +30,7 @@ class GaleriasController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
         $grid->column('resumo', __('Resumo'));
+        $grid->column('capa', __('Capa'))->image();
         $grid->actions(function ($actions) {
             $actions->disableView();
         });
@@ -67,6 +68,7 @@ class GaleriasController extends AdminController
 
         $form->text('title', __('Title'));
         $form->text('resumo', __('Resumo'));
+        $form->file('capa',__('Capa'));
         $form->hasMany('fotos','Fotos', function (Form\NestedForm $form) {
             $form->file('foto', __('Foto'));
             $form->text('texto','Texto');

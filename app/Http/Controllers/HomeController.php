@@ -13,6 +13,8 @@ use App\Models\ValoresPagar;
 use App\Models\Servico;
 use App\Models\Equipes;
 use App\Models\Noticia;
+use App\Models\Galeria;
+use App\Models\Fotos;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -191,6 +193,48 @@ class HomeController extends Controller
         Mail::to($user)->send(new NovoClienteMail($cliente));
         Mail::to($cliente->email)->send(new ClienteMail($cliente, $valores_pagar));
         return redirect('/associar?cadastrado=true');
+    }
+
+    public function momentos(){
+        $momentos = Galeria::paginate(9);
+        return view('momentos', ['momentos' => $momentos]);
+    }
+
+    public function momento($id){
+        $momento = Galeria::find($id);
+        return view('momento_interna',['momento' => $momento]);
+        
+    }
+    public function getFotos($id){
+        $fotos = Fotos::where('galeria_id',$id)->get();
+        $fotoArray = [];
+        foreach($fotos as $foto){
+            $fotoArray[] = ['texto' => $foto->texto,
+            'foto' => url(str_replace('public','storage', $foto->foto)),
+            'width_c'=> 800,
+            'width_h'=> 1600,
+            'width_k'=> 2048,
+            'width_l'=> 1024,
+            'width_m'=> 500,
+            'width_n'=> 320,
+            'width_q'=> 150,
+            'width_s'=> 240,
+            'width_sq'=> 75,
+            'width_t'=> 100,
+            'width_z'=> 640,
+            'height_c'=> 533,
+            'height_h'=> 1067,
+            'height_k'=> 1365,
+            'height_l'=> 683,
+            'height_m'=> 333,
+            'height_n'=> 213,
+            'height_q'=> 150,
+            'height_s'=> 160,
+            'height_sq'=> 67,
+            'height_t'=> 67,
+            'height_z'=> 427];
+        }
+        return $fotoArray;
     }
     
    

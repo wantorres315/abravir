@@ -28,4 +28,7 @@ Route::get('/noticias', [HomeController::class, 'noticias']);
 Route::get('/noticia/{id}', [HomeController::class, 'noticias_interna']);
 Route::get('/cancela_associacao/{id}', [HomeController::class, 'cancela_associacao']);
 Route::get('/confirma_associacao/{id}', [HomeController::class, 'confirma_associacao']);
+Route::get('/momentos', [HomeController::class, 'momentos']);
+Route::get('/momento/{id}', [HomeController::class, 'momento']);
 Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF']);
+Route::get('getFotos/{id}', [HomeController::class, 'getFotos']);
