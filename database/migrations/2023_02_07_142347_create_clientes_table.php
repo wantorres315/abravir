@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string('documento');
             $table->date('validade');
             $table->string('ativo')->default('não');
+            $table->string('rg');
+            $table->string('cpf');
+            $table->text('observacoes')->nullable();
             $table->timestamps();
         });
         Schema::create('parentescos', function (Blueprint $table) {

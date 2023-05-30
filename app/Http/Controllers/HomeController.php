@@ -15,6 +15,7 @@ use App\Models\Equipes;
 use App\Models\Noticia;
 use App\Models\Galeria;
 use App\Models\Fotos;
+use App\Models\Eventos;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -27,15 +28,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $parceiros = Parceiros::limit(3)->get();
+        $parceiros = Parceiros::limit(3)->where('home',1)->get();
+        $servicos = Servico::all();
         $noticias = Noticia::limit(3)->orderBy('created_at','desc')->get();
         $titulo_noticia = getConfig('text_noticias_home')->valor;
-        return view('home', ['parceiros' => $parceiros, 'noticias' => $noticias, 'titulo_noticia'=>$titulo_noticia]);
+        return view('home', ['parceiros' => $parceiros, 'noticias' => $noticias, 'titulo_noticia'=>$titulo_noticia, 'servicos' => $servicos]);
     }
 
     public function parceiros()
     {
-        $parceiros = Parceiros::all();
+        $parceiros = Parceiros::orderBy('home','DESC')->get();
         return view('parceiros', ['parceiros' => $parceiros, 'show_all' => true]);
     }
 
@@ -62,6 +64,8 @@ class HomeController extends Controller
         $cliente->documento = $request->input('documento');
         $cliente->cep = $request->input('codigo_postal');
         $cliente->endereco = $request->input('endereco');
+        $cliente->rg = $request->input('rg');
+        $cliente->cpf = $request->input('cpf');
         $anoInicial = date("Y");
         $anoFinal = date("Y")+1;
         $month = date("m");
@@ -135,8 +139,8 @@ class HomeController extends Controller
                     $dependente->parentesco_id = $request->input('parentesco_dependente')[$i];
                     $dependente->cliente_id = $cliente->id;
                     if(verifica_nascimento($request->input('nascimento_dependente')[$i]) == 'menor'){
-                        $descricao_pagar = $descricao_pagar."<br>".$request->input('nome_dependente')[$i]."- Valor :€5.00";
-                        $valor_pagar = $valor_pagar+5;
+                        $descricao_pagar = $descricao_pagar."<br>".$request->input('nome_dependente')[$i]."- Valor :€0.00";
+                        $valor_pagar = $valor_pagar+0;
                     }else{
                         $descricao_pagar = $descricao_pagar."<br>".$request->input('nome_dependente')[$i]."- Valor :€12.00";
                         $valor_pagar = $valor_pagar+12;
@@ -191,7 +195,7 @@ class HomeController extends Controller
         $valores_pagar = ValoresPagar::where('cliente_id',$id)->first();
         $user = getConfiguration('email_envio_fale_conosco')->valor;
         Mail::to($user)->send(new NovoClienteMail($cliente));
-        Mail::to($cliente->email)->send(new ClienteMail($cliente, $valores_pagar));
+        $cliente = Cliente::find(26);
         return redirect('/associar?cadastrado=true');
     }
 
@@ -237,5 +241,58 @@ class HomeController extends Controller
         return $fotoArray;
     }
     
+    public function getCalendar(){
+        $eventos = Eventos::where('data', '>=', date('Y-m-d'))->where('publico','1')->get();
+        $ev = [];
+        foreach($eventos as $evento){
+            $data = explode('-', $evento->data);
+            switch($data[1]){
+                case 1:
+                    $mes = 'Jan';
+                break;
+                case 2:
+                    $mes = 'Feb';
+                break;
+                case 3:
+                    $mes = 'Mar';
+                break;
+                case 4:
+                    $mes = 'Apr';
+                break;
+                case 5:
+                    $mes = 'May';
+                break;
+                case 6:
+                    $mes = 'Jun';
+                break;
+                case 7:
+                    $mes = 'Jul';
+                break;
+                case 8:
+                    $mes = 'Aug';
+                break;
+                case 9:
+                    $mes = 'Set';
+                break;
+                case 10:
+                    $mes = 'Oct';
+                break;
+                case 11:
+                    $mes = 'Nov';
+                break;
+                case 12:
+                    $mes = 'Dec';
+                break;
+            }
+            $ev[] = ['id' => rand(1,5),
+                    'name' => $evento->titulo,
+                    'description' => '',
+                    'date' => $mes.'/'.$data[2]."/".$data[0],
+                    'link' => $evento->link,
+                    'type' => 'event'];
+            
+        }
+        return $ev;
+    }
    
 }

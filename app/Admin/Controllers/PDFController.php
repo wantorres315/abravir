@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Dependentes;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Mail;
   
 class PDFController extends Controller
 {
@@ -20,7 +21,7 @@ class PDFController extends Controller
       
         $cliente = Cliente::where('id',$id)->first();
         $dependentes = Dependentes::where('cliente_id',$id)->get();
-        $qrcode = base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate("http://www.abravir.pt/cliente/ABRA00".$cliente->id));
+        $qrcode = base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate("http://www.abravir.pt/admin/associados/".$cliente->id));
         $data = [
             'cliente' => $cliente,
             'dependentes' => $dependentes,
@@ -33,8 +34,9 @@ class PDFController extends Controller
         //return view('carteirinha',$data);   
 
         $pdf = PDF::loadView('carteirinha', $data);
-     
-        return $pdf->download('carteirinha.pdf');
+        Mail::to($user)->send(new NovoClienteMail($cliente));
+        Mail::to($cliente->email)->send(new ClienteMail($cliente, $valores_pagar));
+        //return $pdf->download('carteirinha.pdf');
         
         
     }

@@ -51,6 +51,25 @@ var userAgent = navigator.userAgent.toLowerCase(),
  */
 $document.ready(function () {
 
+	$.ajax({
+		type:'GET',
+		url: 'getCalendar',
+		success: function (data){
+			$("#calendar").evoCalendar({
+				settingName: 'Proximos Eventos',
+				theme: 'Royal Navy',
+				language: 'pt',
+				calendarEvents:data
+			});
+		
+		}
+	});
+  $('#calendar').on('selectEvent', function(event, activeEvent) {
+		var href = $(this).find('div.event-list').find('div.event-container').data('href')
+		    if(href != null){
+					window.location = href;
+				}
+		});
 	$("body").on('click', '.add_dependente', function(){
 		const html = '<div class = "row"><div class="cell-sm-4 col-lg-4"><div class="form-group"><label class="form-label-outside" for="contact-last-name">Nome</label><input class="form-control" id="contact-last-name" type="text" name="nome_dependente[]" ></div></div><div class="cell-sm-4 col-lg-4"><div class="form-group"><label class="form-label-outside" for="contact-last-name">Data de Nascimento</label><input class="form-control" id="contact-last-name" type="date" name="nascimento_dependente[]" ></div></div><div class="cell-sm-4 col-lg-4"><div class="form-group"><label class="form-label-outside" for="contact-last-name">Parentesco</label><select class="form-control" id="contact-last-name" type="text" name="parentesco_dependente[]" ><option value = "1">Marido/Esposa</option><option value = "2">Filho/Filha</option><option value = "3">Irmão/Irmã</option><option value = "4">Primo/Prima</option><option value = "5">Cunhado/Cunhada</option><option value = "6">Avô/Avó</option><option value = "7">Pai/Mãe</option><option value = "8">Sogro/Sogra</option></select></div></div></div>';
 		

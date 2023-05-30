@@ -12,6 +12,7 @@ Use Encore\Admin\Widgets\Table;
 use App\Admin\Actions\Post\Aprovar;
 use App\Admin\Actions\Post\Reprovar;
 use App\Admin\Actions\Post\Deletar;
+use App\Admin\Actions\Post\SendCarteirinha;
 class ClienteController extends AdminController
 {
     /**
@@ -57,7 +58,7 @@ class ClienteController extends AdminController
         $grid->actions(function ($actions) {
             $actions->disableDelete();
             $actions->disableEdit();
-            $actions->disableView();
+           
             $cliente = Cliente::find($actions->getKey());
             if($cliente->ativo == 'sim'){
                 $actions->add(new Reprovar);
@@ -65,6 +66,10 @@ class ClienteController extends AdminController
                 $actions->add(new Aprovar);
             }
             $actions->add(new Deletar);
+            if($cliente->ativo == 'sim'){
+                $actions->add(new SendCarteirinha);
+            }
+            
             
         });
         
@@ -81,8 +86,11 @@ class ClienteController extends AdminController
     protected function detail($id)
     {
         $show = new Show(Cliente::findOrFail($id));
-
-
+        $show->panel()
+            ->tools(function ($tools) {
+            $tools->disableEdit();
+            $tools->disableDelete();
+        });
 
         return $show;
     }

@@ -18,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/parceiros', [HomeController::class, 'parceiros']);
 Route::get('/associar', [HomeController::class, 'associar']);
@@ -32,3 +33,4 @@ Route::get('/momentos', [HomeController::class, 'momentos']);
 Route::get('/momento/{id}', [HomeController::class, 'momento']);
 Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF']);
 Route::get('getFotos/{id}', [HomeController::class, 'getFotos']);
+Route::get('getCalendar', [HomeController::class, 'getCalendar']);

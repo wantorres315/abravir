@@ -35,9 +35,17 @@ class ParceirosController extends AdminController
         $grid->column('email', __('Email'));
         $grid->column('telemovel', __('Telemovel'));
         $grid->column('horario_atendimento', __('Horario atendimento'));
+        
         $grid->column('observacoes', __('Observações sobre a parceria'));
-     
- 
+        $grid->column('home')->display(function () {
+           
+            if($this->home == 1){
+                return 'Sim';
+            }else{
+                return "não";
+            }
+        });
+        
         return $grid;
     }
 
@@ -90,7 +98,9 @@ class ParceirosController extends AdminController
         $form->text('endereco', __('Endereco'));
         $form->text('telemovel', __('Telemovel'));
         $form->text('horario_atendimento', __('Horario atendimento'));
-        $form->textarea('observacoes', __('Observações sobre a parceria'));
+       
+        $form->ckeditor('observacoes', __('Observações sobre a parceria'));
+        $form->select('home',__("Destaque"))->options([0 => 'Não', 1 => 'sim']);
 
         return $form;
     }

@@ -22,6 +22,7 @@ Route::group([
     $router->resource('noticias', NoticiasController::class);
     $router->resource('doacoes', DoacoesController::class);
     $router->resource('momentos', GaleriasController::class);
+    $router->resource('proximos_eventos', EventosController::class);
     $router->get('/', 'HomeController@index')->name('home');
    
 });

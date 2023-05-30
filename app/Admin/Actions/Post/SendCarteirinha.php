@@ -10,16 +10,13 @@ use PDF;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Carteirinha;
 
-class Aprovar extends RowAction
+class SendCarteirinha extends RowAction
 {
-    public $name = 'Ativar';
+    public $name = 'Enviar Carteirinha';
 
     public function handle(Model $model)
     {
         
-        $model->ativo = 'sim';
-        $model->save();
-
         $dependentes = Dependentes::where('cliente_id',$model->id)->get();
         $qrcode = base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate("http://www.abravir.pt/admin/associados/".$model->id));
         $data = [
@@ -35,13 +32,13 @@ class Aprovar extends RowAction
         
         Mail::to($model->email)->send(new Carteirinha($model, $pdf->output()));
       
-        return $this->response()->success('Associado Ativado!')->refresh();
+        return $this->response()->success('Carteirinha Enviada!')->refresh();
 
 
     }
     public function dialog()
     {
-        $this->confirm('Você tem certeza que deseja aprovar esse associado?');
+        $this->confirm('Você tem certeza que deseja enviar carteirinha para esse associado?');
     }
 
     public function html()

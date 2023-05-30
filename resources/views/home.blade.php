@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('title', 'Abravir')
+@section('title', getConfig('nome_site')->valor)
 
 @section('content')
 <section class="jumbotron-custom jumbotron-custom-3 bg-white bg-image bg-image-custom bg-image-center" style="background-image: url(images/fundo.jpg);">
@@ -11,58 +11,7 @@
                 <h1>{!! getConfig('texto_inicial')->valor !!}</h1>
                 <p class="large"> {!! getConfig('descricao_inicial')->valor !!}</p>
 
-                @php
-                if(!empty(getConfiguration('video_inicial')->valor)){
-                @endphp
-                <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-                <div id="player"></div>
-
-                <script>
-                  // 2. This code loads the IFrame Player API code asynchronously.
-                  var tag = document.createElement('script');
-
-                  tag.src = "https://www.youtube.com/iframe_api";
-                  var firstScriptTag = document.getElementsByTagName('script')[0];
-                  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-                  // 3. This function creates an <iframe> (and YouTube player)
-                  //    after the API code downloads.
-                  var player;
-                  function onYouTubeIframeAPIReady() {
-                    player = new YT.Player('player', {
-                    
-                      videoId: '{{ getConfiguration('video_inicial')->valor }}',
-                      events: {
-                        'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
-                      }
-                    });
-                  }
-
-                  // 4. The API will call this function when the video player is ready.
-                  function onPlayerReady(event) {
-                    event.target.playVideo();
-                  }
-
-                  // 5. The API calls this function when the player's state changes.
-                  //    The function indicates that when playing a video (state=1),
-                  //    the player should play for six seconds and then stop.
-                  var done = false;
-                  function onPlayerStateChange(event) {
-                    if (event.data == YT.PlayerState.PLAYING && !done) {
-                      setTimeout(stopVideo, 6000);
-                      done = true;
-                    }
-                  }
-                  function stopVideo() {
-                    player.stopVideo();
-                  }
-                </script>
-                @php
-
-                }
-
-                @endphp
+               
                 <a class="btn btn-style-1 btn-primary" href="{{getConfig('associe-se')->valor}}">{{ getConfig('associe-se')->nome }}</a>
                 
               </div>
@@ -70,6 +19,33 @@
           </div>
         </div>
       </section>
+      @php
+      if(!empty(getConfiguration('video_inicial')->valor)){
+      @endphp
+      <section class=" section-lg bg-periglacial-blue text-center">
+        <div class="shell">
+          <div class="range range-sm-center range-75">
+             <div class="image-wrap-inner">
+                <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+                <iframe id="ytplayer" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/{{getConfiguration('video_inicial')->valor}}?autoplay=1&origin=http://example.com"frameborder="0"></iframe>
+                
+               
+
+                 
+                
+               
+              
+              </div>
+          
+           
+          </div>
+        </div>
+      </section>
+      @php
+
+      }
+
+      @endphp
       <section class=" section-lg bg-white">
         <div class="shell">
           <div class="range range-sm-center range-75">
@@ -78,7 +54,22 @@
                 <h2>{{getConfig('text_sobre')->valor}}</h2>
                 
                 <p class="big">{!!getConfig('descricao_inicial_sobre')->valor!!}</p><a class="btn btn-style-1 btn-primary" href="{{getConfig('quem somos')->valor}}">{{getConfig('quem somos')->nome}}</a>
-              
+
+                <div class="cell-xs-12">
+                    <div class="range range-30">
+                      @foreach($servicos as $servico)
+                      <div class="cell-xs-6 cell-md-3">
+                        <article class="box-icon">
+                        
+                          <p class="box-icon-header"><a class="link-underlined" href="services.html">{{$servico->nome}}</a></p>
+                          <p class="box-icon-text">{{$servico->descricao}}</p>
+                        </article>
+                      </div>
+                     @endforeach
+                    
+                      
+                    </div>
+                  </div>
               </div>
             </div>
            
@@ -87,7 +78,15 @@
       </section>
       @include('modulos.noticias')
       
-      
+      <section class=" section-lg bg-white">
+      <h2 style = 'text-align:center'>Proximos Eventos</h2>
+      <br>
+      <div id="calendar"></div>
+              
+        </div>
+        
+      </section>
+
       <section class="box-wrap box-wrap-md bg-white">
               <div class="box-wrap-map" style = "background-color:#b1c7cf">
                 
@@ -137,5 +136,6 @@
                 </div>
               </div>
         </section>
+ 
       @include('modulos.parceiros')
 @endsection

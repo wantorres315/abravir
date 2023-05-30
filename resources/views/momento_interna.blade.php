@@ -3,7 +3,7 @@
 @section('title', $momento->title)
 
 @section('content')
-    <input type = "text" name = "id" id = "id_momento" value = "{{$momento->id}}">
+    <input type = "hidden" name = "id" id = "id_momento" value = "{{$momento->id}}">
     <link rel="stylesheet" href="{{ URL::asset('css/blueimp-gallery.css')}}" />
     <link rel="stylesheet" href="{{ URL::asset('css/blueimp-gallery-indicator.css')}}" />
     <link rel="stylesheet" href="{{ URL::asset('css/blueimp-gallery-video.css')}}" />

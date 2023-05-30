@@ -19,3 +19,4 @@
  */
 
 Encore\Admin\Form::forget(['map', 'editor']);
+Encore\Admin\Facades\Admin::js('/vendor/chartjs/dist/Chart.min.js');

@@ -6,11 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Attachment;
 
-class NovoClienteMail extends Mailable
+class Carteirinha extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,11 +20,12 @@ class NovoClienteMail extends Mailable
      *
      * @return void
      */
-    private $nome = "";
-    public function __construct($client)
+    public function __construct($client, $attachment)
     {
        
         $this->nome = $client->nome;
+        $this->attachment = $attachment;
+        
        
     }
 
@@ -35,9 +37,10 @@ class NovoClienteMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address(getConfiguration('email_envio_smtp')->valor, getConfiguration('nome_envio')->valor),
-            subject: 'Novo cadastro no site da ABRAVIR',
+            from: new Address(getConfiguration('email_envio_smtp')->valor,  getConfiguration('nome_envio')->valor),
+            subject: 'Carteirinha de Associado ABRAVIR',
         );
+        
     }
 
     /**
@@ -48,9 +51,10 @@ class NovoClienteMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.novo_cliente',
+            view: 'emails.carteirinha',
             with: [
-                'nome' => $this->nome
+                'nome' => $this->nome,
+                
                 
             ],
         );
@@ -63,6 +67,8 @@ class NovoClienteMail extends Mailable
      */
     public function attachments()
     {
-        return [];
+      return [
+      Attachment::fromData(fn() => $this->attachment, 'carteirinhas.pdf')->withMime('application/pdf'),
+      ];
     }
 }

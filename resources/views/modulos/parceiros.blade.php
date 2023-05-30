@@ -18,7 +18,7 @@
                     <div class="thumbnail-card-body">
                       <p class="thumbnail-card-header" data-toggle="modal" data-target="#modalWindow">{{$parceiro->nome}}</p>
                       <div class="thumbnail-card-text">
-                        <p>{{$parceiro->observacoes}}</p>
+                        <p>{!!$parceiro->observacoes!!}</p>
                         
                         <p>
                           @if($parceiro->telefone || $parceiro->telemovel) <i class = "fa fa-phone"></i> @endif 

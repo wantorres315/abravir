@@ -33,7 +33,7 @@ $(function () {
 
   // Load demo images from Flickr:
   $.ajax({
-    url: 'http://localhost:8000/getFotos/'+$("#id_momento").val(),
+    url: 'https://abravir.pt/public/getFotos/'+$("#id_momento").val(),
   }).done(function (result) {
    
     var maxWidth = $(document.body).css('max-width')
